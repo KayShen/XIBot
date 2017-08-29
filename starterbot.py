@@ -14,6 +14,48 @@ EXAMPLE_COMMAND = "do"
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 
+attachments_json = [
+    {
+        "fallback": "Upgrade your Slack client to use messages like these.",
+        "color": "#3AA3E3",
+        "attachment_type": "default",
+        "callback_id": "menu_options_2319",
+        "actions": [
+            {
+                "name": "games_list",
+                "text": "您的肤质是...",
+                "type": "select",
+                "options": [
+                        {
+                            "text": "干皮",
+                            "value": 0
+                        },
+                        {
+                            "text": "混合偏干",
+                            "value": 1
+                        },
+                        {
+                            "text": "混合",
+                            "value": 2
+                        },
+                        {
+                            "text": "混合偏油",
+                            "value": 3
+                        },
+                        {
+                            "text": "油皮",
+                            "value": 4
+                        },
+                        {
+                            "text": "不太确定",
+                            "value": 5
+                        }
+                    ]
+            }
+        ]
+    }
+]
+
 def handle_command(command, channel):
     """
         Receives commands directed at the bot and determines if they
@@ -22,10 +64,20 @@ def handle_command(command, channel):
     """
     response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
                "* command with numbers, delimited by spaces."
-    if command.startswith(EXAMPLE_COMMAND):
+    if command == 'start':
+        slack_client.api_call(
+          "chat.postMessage",
+          channel=channel,
+          text="您的肤质是？",
+          attachments=attachments_json
+        )
+
+    elif command.startswith(EXAMPLE_COMMAND):
         response = "Sure...write some more code then I can do that!"
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
+
+
 
 
 def parse_slack_output(slack_rtm_output):

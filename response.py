@@ -6,7 +6,7 @@ import json
 import time
 from slackclient import SlackClient
 
-slack_client = 'xoxb-232306006676-RbKxztSArd46oopnAJFlE2Bn'
+slack_client = SlackClient('xoxb-232306006676-RbKxztSArd46oopnAJFlE2Bn')
 
 app = Flask(__name__)
 

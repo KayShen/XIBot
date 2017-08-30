@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request, make_response, Response
 import os
 import json
@@ -53,6 +55,6 @@ def message_options():
     # return Response(json.dumps(menu_options), mimetype='application/json')
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3500)

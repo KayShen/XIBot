@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/response", methods=["POST"])
 def message_options():
     form_json = json.loads(request.form["payload"])
-
+    print(form_json)
     menu_options = {
         "options": [
             {

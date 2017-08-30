@@ -16,41 +16,47 @@ slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 attachments_json = [
     {
-        "fallback": "Upgrade your Slack client to use messages like these.",
+        "fallback": "您的肤质是...",
+        "title": "您的肤质是...",
         "color": "#3AA3E3",
         "attachment_type": "default",
-        "callback_id": "menu_options_2319",
+        "callback_id": "question_1",
         "actions": [
+            {   
+                "name": "干皮",
+                "text": "干皮",
+                "value": "干皮",
+                "type": "button",
+            },
             {
-                "name": "games_list",
-                "text": "您的肤质是...",
-                "type": "select",
-                "options": [
-                        {
-                            "text": "干皮",
-                            "value": 0
-                        },
-                        {
-                            "text": "混合偏干",
-                            "value": 1
-                        },
-                        {
-                            "text": "混合",
-                            "value": 2
-                        },
-                        {
-                            "text": "混合偏油",
-                            "value": 3
-                        },
-                        {
-                            "text": "油皮",
-                            "value": 4
-                        },
-                        {
-                            "text": "不太确定",
-                            "value": 5
-                        }
-                    ]
+                "name": "混合偏干",
+                "text": "混合偏干",
+                "value": "混合偏干",
+                "type": "button",
+            },
+            {
+                "name": "混合",
+                "text": "混合",
+                "value": "混合",
+                "type": "button",
+            },
+            {
+                "name": "混合偏油",
+                "text": "混合偏油",
+                "value": "混合偏油",
+                "type": "button",
+            },
+            {
+                "name": "油皮",
+                "text": "油皮",
+                "value": "油皮",
+                "type": "button",
+            },
+            {
+                "name": "不太确定",
+                "text": "不太确定",
+                "value": "不太确定",
+                "type": "button",
             }
         ]
     }
@@ -97,7 +103,7 @@ def parse_slack_output(slack_rtm_output):
 
 
 if __name__ == "__main__":
-    READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
+    READ_WEBSOCKET_DELAY = 0 # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("StarterBot connected and running!")
         while True:

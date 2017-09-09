@@ -18,43 +18,6 @@ def form_question(question_id):
             "color": "#3AA3E3",
             "attachment_type": "default",
             "callback_id": question_id,
-            "actions": [
-                {   
-                    "name": "干皮",
-                    "text": "干皮",
-                    "value": "干皮",
-                    "type": "button",
-                },
-                {
-                    "name": "混合偏干",
-                    "text": "混合偏干",
-                    "value": "混合偏干",
-                    "type": "button",
-                },
-                {
-                    "name": "混合",
-                    "text": "混合",
-                    "value": "混合",
-                    "type": "button",
-                },
-                {
-                    "name": "混合偏油",
-                    "text": "混合偏油",
-                    "value": "混合偏油",
-                    "type": "button",
-                },
-                {
-                    "name": "油皮",
-                    "text": "油皮",
-                    "value": "油皮",
-                    "type": "button",
-                },
-                {
-                    "name": "不太确定",
-                    "text": "不太确定",
-                    "value": "不太确定",
-                    "type": "button",
-                }
-            ]
+            "actions": actions
         }
     ]

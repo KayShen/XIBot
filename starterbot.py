@@ -4,15 +4,15 @@ from slackclient import SlackClient
 
 
 # starterbot's ID as an environment variable
-BOT_ID = os.environ.get("BOT_ID")
-
+# BOT_ID = os.environ.get("BOT_ID")
+BOT_ID = "U6U9006KW"
 # constants
 AT_BOT = "<@" + BOT_ID + ">"
 EXAMPLE_COMMAND = "do"
 
 # instantiate Slack & Twilio clients
-slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-
+# slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+slack_client = SlackClient('xoxb-232306006676-UbSba54K94umFZYRuDFtZDCo')
 
 attachments_json = [
     {

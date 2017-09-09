@@ -9,15 +9,20 @@ from init_data import *
 
 def form_question(question_id):
     db = connect_to_mongo()
-    question_dic = db.questions.find({"_id": question_id})
-    actions = [{"name": question_dic["question"], "text": question_dic["question"], "value": question_dic["question"], "type": "button"} for x in question_dic["choices"]]
+    question_dic = db.questions.find_one({"_id": question_id})
+    print(question_dic)
+    actions = [{"name": v, "text": v, "value": k, "type": "button"} for k, v in question_dic["choices"].items()]
     attachments_json = [
         {
-            "fallback": "您的肤质是...",
-            "title": question,
+            "fallback": question_dic["question"],
+            "title": question_dic["question"],
             "color": "#3AA3E3",
             "attachment_type": "default",
             "callback_id": question_id,
             "actions": actions
         }
     ]
+    return attachments_json
+
+
+form_question("000001")

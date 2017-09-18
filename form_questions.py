@@ -10,7 +10,6 @@ from init_data import *
 def form_question(question_id):
     db = connect_to_mongo()
     question_dic = db.questions.find_one({"_id": question_id})
-    print(question_dic)
     actions = [{"name": v, "text": v, "value": k, "type": "button"} for k, v in question_dic["choices"].items()]
     attachments_json = [
         {
@@ -24,5 +23,7 @@ def form_question(question_id):
     ]
     return attachments_json
 
-
-form_question("000001")
+def get_next_question(question_id):
+    db = connect_to_mongo()
+    return db.next_question.find_one({"_id": question_id})["next_question_id"]
+# form_question("000001")

@@ -23,3 +23,9 @@ def insert_question_data(datapath = "data/questions.json"):
         data = json.load(data_file)
     db = connect_to_mongo()
     db.questions.insert_many(data)
+
+def insert_next_question_data(datapath = "data/next_question.json"):
+    with open(datapath) as data_file:
+        data = json.load(data_file)
+    db = connect_to_mongo()
+    db.next_question.insert_many(data)

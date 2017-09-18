@@ -1,7 +1,7 @@
 import os
 import time
 from slackclient import SlackClient
-
+from form_questions import *
 
 # starterbot's ID as an environment variable
 # BOT_ID = os.environ.get("BOT_ID")
@@ -12,55 +12,9 @@ EXAMPLE_COMMAND = "do"
 
 # instantiate Slack & Twilio clients
 # slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-slack_client = SlackClient('xoxb-232306006676-UbSba54K94umFZYRuDFtZDCo')
+slack_client = SlackClient('xoxb-232306006676-y6TnqwYMqU0S9qVPd1vKvOon')
 
-attachments_json = [
-    {
-        "fallback": "您的肤质是...",
-        "title": "您的肤质是...",
-        "color": "#3AA3E3",
-        "attachment_type": "default",
-        "callback_id": "question_1",
-        "actions": [
-            {   
-                "name": "干皮",
-                "text": "干皮",
-                "value": "干皮",
-                "type": "button",
-            },
-            {
-                "name": "混合偏干",
-                "text": "混合偏干",
-                "value": "混合偏干",
-                "type": "button",
-            },
-            {
-                "name": "混合",
-                "text": "混合",
-                "value": "混合",
-                "type": "button",
-            },
-            {
-                "name": "混合偏油",
-                "text": "混合偏油",
-                "value": "混合偏油",
-                "type": "button",
-            },
-            {
-                "name": "油皮",
-                "text": "油皮",
-                "value": "油皮",
-                "type": "button",
-            },
-            {
-                "name": "不太确定",
-                "text": "不太确定",
-                "value": "不太确定",
-                "type": "button",
-            }
-        ]
-    }
-]
+attachments_json = form_question("000001")
 
 def handle_command(command, channel):
     """
@@ -74,14 +28,13 @@ def handle_command(command, channel):
         slack_client.api_call(
           "chat.postMessage",
           channel=channel,
-          text="您的肤质是？",
           attachments=attachments_json
         )
 
     elif command.startswith(EXAMPLE_COMMAND):
-        response = "Sure...write some more code then I can do that!"
-    slack_client.api_call("chat.postMessage", channel=channel,
-                          text=response, as_user=True)
+        response = "I don't understand"
+        slack_client.api_call("chat.postMessage", channel=channel,
+                              text=response, as_user=True)
 
 
 
@@ -94,6 +47,7 @@ def parse_slack_output(slack_rtm_output):
     """
     output_list = slack_rtm_output
     if output_list and len(output_list) > 0:
+        print(output_list)
         for output in output_list:
             if output and 'text' in output and AT_BOT in output['text']:
                 # return text after the @ mention, whitespace removed

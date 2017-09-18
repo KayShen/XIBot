@@ -12,7 +12,7 @@ EXAMPLE_COMMAND = "do"
 
 # instantiate Slack & Twilio clients
 # slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-slack_client = SlackClient('xoxb-232306006676-y6TnqwYMqU0S9qVPd1vKvOon')
+slack_client = SlackClient('xoxb-232306006676-PgGkz7iziRxDQidfuZMlXKNa')
 
 attachments_json = form_question("000001")
 

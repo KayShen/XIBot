@@ -7,17 +7,17 @@ import time
 from slackclient import SlackClient
 from form_questions import *
 
-slack_client = SlackClient('xoxb-232306006676-UbSba54K94umFZYRuDFtZDCo')
+slack_client = SlackClient('xoxb-232306006676-y6TnqwYMqU0S9qVPd1vKvOon')
 
 app = Flask(__name__)
 
-@app.route("/response", methods=["POST"])
+@app.route("/response", methods=["POST", "GET"])
 def message_options():
     form_json = json.loads(request.form["payload"])
     print(form_json)
     previous_question_id = form_json['callback_id']
     attachments_json = form_question("001001")
-    
+
     slack_client.api_call(
       "chat.postMessage",
       channel=form_json["channel"]["id"],

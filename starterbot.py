@@ -36,9 +36,6 @@ def handle_command(command, channel):
         slack_client.api_call("chat.postMessage", channel=channel,
                               text=response, as_user=True)
 
-
-
-
 def parse_slack_output(slack_rtm_output):
     """
         The Slack Real Time Messaging API is an events firehose.

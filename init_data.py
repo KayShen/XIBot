@@ -5,8 +5,8 @@ import sys
 import os
 import json
 
-def connect_to_mongo(mongodb_ip = '52.220.88.110'):
-    url = "mongodb://xiuser:Xiaoxi@"+ mongodb_ip +"/xigroup"
+def connect_to_mongo(mongodb_ip = ''):
+    url = "mongodb://@"+ mongodb_ip +"/"
     client = MongoClient(url)
     db = client.xigroup
     return db

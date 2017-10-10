@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex">
+  <title>化妆品调查问卷</title>
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+  <style type='text/css'>
+    .row-index {
+      width: 50px;
+      display: inline-block;
+    }
+  </style>
+
+  <script type='text/javascript'>
+    $(document).ready(function () {
+            $("#form1").submit(function () {
+                window.localStorage['user_name'] = $("input[name = 'user_name']").val();
+                window.localStorage['location'] = $("input[name = 'location']").val();
+            });
+            $(window).load(function () {
+                $("input[name = 'user_name']").val(window.localStorage['user_name']);
+                $("input[name = 'location']").val(window.localStorage['location']);
+            });
+        });
+  </script>
+</head>
+
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">化妆品调查问卷</a>
+        </div>
+  </div>
+</nav>
+<div class="container" style="padding-top: 80px;">
+  <form id="form1" method="POST">
+    <div class="row">
+        <div class='col-sm-6'>
+          <div class="form-group">
+            <Label for="usr">姓名:</Label>
+            <input type="name" class="form-control" id="user_name" name="user_name" required>
+          </div>
+        </div>
+        <div class='col-sm-6'>
+            <div class="form-group">
+              <Label for="loc">From:</Label>
+              <select type='text' class="form-control" id="location" name="location">
+                <option value="China">中国</option>
+                <option value="Korea">韩国</option>
+                <option value="Japan">日本</option>
+                <option value="US">美国</option>
+                <option value="Others">其他地区</option>
+              </select>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div>
+      <h4>您用过的粉底...</h4>
+
+    </div>
+    <br/>
+    <div id='questions'></div>
+      <script>
+        var questions = {{questions|tojson}}
+        for(var i=0; i<questions.length; i++){
+          var choices = questions[i]["choices"];
+          var choices_section = ""
+          for(var choice_letter in choices){
+            var choice_part =
+              "<div class='radio'>" +
+              "<label><input type='radio' name='q"+ questions[i]["_id"]+ "' value='"+ choice_letter +"' required>" + choice_letter + ". " +  choices[choice_letter] + "</label>" +
+              "</div>"
+            choices_section = choices_section.concat(choice_part);
+          };
+
+          document.getElementById('questions').innerHTML=document.getElementById('questions').innerHTML+
+          "<div>" +
+          "<h4>" + questions[i]["question"] + "</h4>" +
+          choices_section +
+          "</div><br/>";
+        }
+      </script>
+    <button type="submit" class="btn btn-primary" style="float: middle;">Submit</button>
+  </form>
+</div>
+</body>
+</html>
